@@ -1,0 +1,78 @@
+#* QUERIES
+
+type Query {
+    users: [User!]!
+    user(id: ID!): User
+}
+
+#* MUTATIONS
+
+type Mutation {
+    newUser(user: UserInput!): UserResult!
+
+    login(login: LoginInput!): LoginResult!
+}
+
+#* TYPES
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    avatar: String
+}
+
+type Likes{
+    count: Int!
+}
+
+type LoginSuccess {
+    token: String!
+}
+
+#* INPUTS
+
+input PostInput {
+    body: String!
+}
+
+input CommentInput {
+    body: String!
+}
+
+input UserInput {
+    name: String!
+    email: String!
+    password: String!
+    avatar: String
+}
+
+input LoginInput {
+    email: String!
+    password: String!
+}
+
+#* ERROR HANDLING
+
+enum Status {
+    Success
+    Failure
+}
+
+type ValidationError {
+    field: String!
+    rule: String!
+}
+
+type UserNotFoundError {
+    id: ID
+    email: String
+}
+
+type BadCredentialsError {
+    message: String!
+}
+
+union UserResult = User | ValidationError
+
+union LoginResult = LoginSuccess | BadCredentialsError | UserNotFoundError | ValidationError
