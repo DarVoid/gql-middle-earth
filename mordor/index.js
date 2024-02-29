@@ -6,11 +6,8 @@ import { promises } from 'fs';
 import { handleAuthHeaders } from './persistence/HandleAuthHeaders';
 import { handlePersistenceHeaders } from './persistence/HandlePersistenceHeaders';
 
-import { Query as PostQuery, Mutations as PostMutation } from './resolvers/post';
-import { Query as CommentQuery, Mutations as CommentMutation, Post as PostComments } from './resolvers/comment';
 import { Query as UserQuery, Mutations as UserMutation, Comment as Commenter, Post as Poster } from './resolvers/user';
 import { Query as AuthQuery, Mutations as AuthMutation } from './resolvers/auth';
-import { Query as LikeQuery, Mutations as LikeMutation, Post as PostLikes, Comment as CommentLikes } from './resolvers/like';
 
 const typeDefs = gql(await promises.readFile('schema.gql', 'utf8'));
 
